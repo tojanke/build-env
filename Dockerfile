@@ -17,7 +17,7 @@ RUN wget https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.
 	&& mv boost_1_69_0 boost \
 	&& cd boost \
 	&& ./bootstrap.sh \
-	&& ./b2 link=static -j 8 --build-dir=build64 --stagedir=stage install \
+	&& ./b2 -j 8 --build-dir=build64 --stagedir=stage complete install \
 	--with-timer --with-date_time --with-random --with-test --with-regex \
 	&& cd ..
 RUN apt-get clean \
