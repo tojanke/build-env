@@ -6,7 +6,7 @@ RUN cd /usr/local/src \
     && wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
     && tar xf cmake-3.13.0.tar.gz \ 
     && cd cmake-3.13.0 \
-    && ./bootstrap \
+    && ./bootstrap 1>/dev/null \
     && make 1>/dev/null  \
     && make install 1>/dev/null \
     && cd .. \
@@ -17,7 +17,7 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 	&& mv boost_1_69_0 boost \
 	&& cd boost \
 	&& ./bootstrap.sh \
-	&& ./b2 -j8 complete stage \
+	&& ./b2 -j8 --build-type=complete stage \
 	--with-timer --with-date_time --with-random --with-test --with-regex \
 	&& cd ..
 RUN apt-get clean \
