@@ -11,7 +11,8 @@ RUN cd /usr/local/src \
     && make install \
     && cd .. \
     && rm -rf cmake*
-RUN wget -c 'https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.bz2/download' \			 
+RUN wget https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.bz2/download \			 
+	&& ls \
 	&& tar xvf download \
 	&& rm download \
 	&& mv boost_1_69_0 boost \
