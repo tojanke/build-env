@@ -4,7 +4,7 @@ RUN apt-get update -qq
 RUN apt-get install -y -qq g++ make wget
 RUN cd /usr/local/src \ 
     && wget https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
-    && tar xvf cmake-3.13.0.tar.gz \ 
+    && tar xf cmake-3.13.0.tar.gz \ 
     && cd cmake-3.13.0 \
     && ./bootstrap \
     && make \
@@ -12,7 +12,7 @@ RUN cd /usr/local/src \
     && cd .. \
     && rm -rf cmake*
 RUN wget https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download \	
-	&& tar xvf download \
+	&& tar xf download \
 	&& rm download \
 	&& mv boost_1_69_0 boost \
 	&& cd boost \
