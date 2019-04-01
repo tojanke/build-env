@@ -11,3 +11,5 @@ RUN cd /usr/local/src \
     && make install \
     && cd .. \
     && rm -rf cmake*
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /etc/apt/sources.list.d/jessie-backports.list
