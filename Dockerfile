@@ -21,5 +21,6 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 	--with-timer --with-date_time --with-random --with-test --with-regex \
 	&& cd ..
 RUN apt-get install -y -qq mingw-w64 wine
+RUN apt-get install -y -qq mono-devel nuget
 RUN apt-get clean \
     	&& rm -rf /var/lib/apt/lists/*
