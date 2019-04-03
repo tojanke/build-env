@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
-RUN apt-get update -qq
-RUN apt-get install -y -qq g++ g++-8 make wget
+RUN (apt-get update -qq > apt.log) || (cat apt.log && false)
+RUN (apt-get install -y -qq g++ g++-8 make wget > apt.log) || (cat apt.log && false)
 ENV export CC=/usr/bin/gcc-8
 ENV export CXX=/usr/bin/g++-8
 RUN cd /usr/local/src \ 
