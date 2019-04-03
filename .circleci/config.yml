@@ -5,4 +5,6 @@ jobs:
       docker_layer_caching: true
     steps:
       - checkout
-      - run: docker build -t devel .
+      - run: 
+          command: docker build -t devel .
+          no_output_timeout: 2h
