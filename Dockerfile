@@ -5,7 +5,7 @@ RUN (apt-get install -y -qq g++ g++-8 make wget > apt.log) || (cat apt.log && fa
 ENV export CC=/usr/bin/gcc-8
 ENV export CXX=/usr/bin/g++-8
 RUN cd /usr/local/src \ 
-    	&& (wget https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz > cmake.log || (cat cmake.log && false)) \
+    	&& wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
     	&& tar xf cmake-3.13.0.tar.gz \ 
     	&& cd cmake-3.13.0 \
     	&& (./bootstrap 1>cmake.log || (cat cmake.log && false)) \
@@ -13,7 +13,7 @@ RUN cd /usr/local/src \
     	&& (make install 1>cmake.log || (cat cmake.log && false)) \
 	&& cd .. \
 	&& rm -rf cmake*
-RUN (wget https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download 1>boost.log || (cat boost.log && false))  \	
+RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download \	
 	&& tar xf download \
 	&& rm download \
 	&& mv boost_1_69_0 boost \
