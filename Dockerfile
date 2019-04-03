@@ -1,8 +1,9 @@
 FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 RUN apt-get update -qq
-RUN apt-get install -y -qq g++-8 make wget
-RUN export CC=/usr/bin/gcc-8 && export CXX=/usr/bin/g++
+RUN apt-get install -y -qq g++ g++-8 make wget
+ENV export CC=/usr/bin/gcc-8
+ENV export CXX=/usr/bin/g++-8
 RUN cd /usr/local/src \ 
     	&& (wget https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz > cmake.log || (cat cmake.log && false)) \
     	&& tar xf cmake-3.13.0.tar.gz \ 
