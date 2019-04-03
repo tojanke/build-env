@@ -2,8 +2,8 @@ FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 RUN (apt-get update -qq > apt.log) || (cat apt.log && false)
 RUN (apt-get install -y -qq g++ g++-8 make wget > apt.log) || (cat apt.log && false)
-ENV export CC=/usr/bin/gcc-8
-ENV export CXX=/usr/bin/g++-8
+ENV CC /usr/bin/gcc-8
+ENV CXX /usr/bin/g++-8
 RUN cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
     	&& tar xf cmake-3.13.0.tar.gz \ 
@@ -22,6 +22,9 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 	&& (./b2 -j8 --build-type=complete --layout=versioned stage \
 	--with-timer --with-date_time --with-random --with-test --with-regex 1>boost.log || (cat boost.log && false)) \
 	&& cd ..
+ENV BOOST_ROOT /boost/
+ENV BOOST_INCLUDEDIR /boost/boost/
+ENV BOOST_LIBRARYDIR /boost/stage/lib/
 RUN apt-get install -y -qq mingw-w64 wine
 RUN apt-get install -y -qq mono-devel nuget
 RUN apt-get clean \
