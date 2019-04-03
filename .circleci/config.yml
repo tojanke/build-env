@@ -1,10 +1,36 @@
-version: 2
-jobs:
-  build:    
+version: 2.1
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: tojanke/test-env
     machine: 
-      docker_layer_caching: true
+		  docker_layer_caching: true
+jobs:
+  build:
+    executor: docker-publisher
     steps:
-      - checkout
-      - run: 
-          command: docker build -t devel .
-          no_output_timeout: 2h
+      - checkout          
+      - run:
+        name: Build Docker image
+        command: docker build -t $IMAGE_NAME:latest .
+      - run:
+        name: Archive Docker image
+        command: docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+        root: .
+        paths:
+          - ./image.tar
+  publish-latest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+        at: /tmp/workspace
+      - run:
+        name: Load archived Docker image
+        command: docker load -i /tmp/workspace/image.tar
+      - run:
+        name: Log In to Docker Hub
+        command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+      - run:
+        name: Publish Docker Image to Docker Hub
+        command: docker push $IMAGE_NAME:latest
