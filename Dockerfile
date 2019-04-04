@@ -22,9 +22,8 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 	&& (./b2 -j8 --build-type=complete --layout=versioned stage \
 	--with-timer --with-date_time --with-random --with-test --with-regex 1>boost.log || (cat boost.log && false)) \
 	&& cd ..
-ENV BOOST_ROOT /boost/
-ENV BOOST_INCLUDEDIR /boost/boost/
-ENV BOOST_LIBRARYDIR /boost/stage/lib/
+RUN rm -R /boost/libs
+RUN rm -R /boost/bin.v2
 RUN apt-get install -y -qq mingw-w64 wine
 RUN apt-get install -y -qq mono-devel nuget
 RUN apt-get clean \
