@@ -25,4 +25,9 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
 ENV BOOST_LIBRARYDIR /boost/stage/lib/
-RUN apt-get install -y -qq mingw-w64 wine mono-devel nuget && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get install -y -qq mingw-w64 wine nuget && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt install apt-transport-https dirmngr gnupg ca-certificates \
+	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
+	&& (echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list) \
+	&& apt update && apt install mono-devel \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/*
