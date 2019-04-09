@@ -29,3 +29,4 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
 ENV BOOST_LIBRARYDIR /boost/stage/lib/
+COPY nuget.config /root/.nuget/NuGet/NuGet.Config
