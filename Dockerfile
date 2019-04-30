@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 RUN (apt-get update -qq 1>>apt.log \
-	&& apt-get install -y -qq g++ g++-8 make wget mingw-w64 wine apt-transport-https dirmngr gnupg ca-certificates 1>>apt.log \
+	&& apt-get install -y -qq g++ g++-8 make wget unzip mingw-w64 wine apt-transport-https dirmngr gnupg ca-certificates 1>>apt.log \
 	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF 1>>apt.log \
 	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
 	&& apt-get update -qq 1>>apt.log && apt-get install -y -qq mono-complete mono-vbnc nuget 1>>apt.log \
