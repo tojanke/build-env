@@ -38,6 +38,6 @@ ENV BOOST_LIBRARYDIR /boost/stage/lib/
 COPY nuget.config /root/.nuget/NuGet/NuGet.Config
 RUN cd /usr/local/src \
 	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.04/nsis-3.04.zip/download \	
-	&& unzip download \
+	&& unzip -qq download \
 	&& rm download \
 	&& mv nsis-3.04 nsis
