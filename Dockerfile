@@ -29,7 +29,7 @@ RUN wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69
   && echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   && (./bootstrap.sh 1>>boost.log || (cat boost.log && false)) \
   && (./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete --layout=versioned stage \
-	--with-timer --with-date_time --with-random --with-test --with-regex 1>>boost.log || (cat boost.log && false)) \
+	--with-timer --with-date_time --with-random --with-test --with-regex 1>>boost.log || true) \
 	&& cd .. && rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
