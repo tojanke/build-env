@@ -14,7 +14,7 @@ RUN cd /usr/local/src \
     	&& tar xf cmake-3.13.0.tar.gz \ 
     	&& cd cmake-3.13.0 \
     	&& (./bootstrap 1>>cmake.log || (cat cmake.log && false)) \
-    	&& (make 1>cmake.log || (cat cmake.log && false)) \
+    	&& (make -j8 1>cmake.log || (cat cmake.log && false)) \
     	&& (make install 1>>cmake.log || (cat cmake.log && false)) \
 	&& cd .. \
 	&& rm -rf cmake*
