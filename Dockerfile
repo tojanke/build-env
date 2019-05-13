@@ -2,19 +2,21 @@ FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 ENV CC /usr/bin/gcc-8
 ENV CXX /usr/bin/g++-8
-RUN (apt-get update -qq 1>>apt.log \
-	&& apt-get install -y -qq --no-install-recommends g++-8 make wget unzip mingw-w64 wine apt-transport-https dirmngr gnupg ca-certificates 1>>apt.log \
-	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF 1>>apt.log \
-	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" | tee /etc/apt/sources.list.d/mono-official-stable.list \
-	&& dpkg --add-architecture i386 && apt-get update -qq 1>>apt.log \
-	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine32 1>>apt.log \	
+RUN 	   apt-get update -qq 1>>/dev/null \
+	&& apt-get install -y -qq --no-install-recommends \
+	   g++-8 make wget unzip mingw-w64 wine apt-transport-https dirmngr gnupg ca-certificates 1>/dev/null \
+	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF 1>>/dev/null \
+	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" \
+	   | tee /etc/apt/sources.list.d/mono-official-stable.list \
+	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
+	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
     	&& tar xf cmake-3.13.0.tar.gz \ 
     	&& cd cmake-3.13.0 \
-    	&& (./bootstrap 1>>cmake.log || (cat cmake.log && false)) \
-    	&& (make -j8 1>cmake.log || (cat cmake.log && false)) \
-    	&& (make install 1>>cmake.log || (cat cmake.log && false)) \
+    	&& ./bootstrap 1>/dev/null \
+    	&& make -j8 1>/dev/null \
+    	&& make install 1>/dev/null \
 	&& cd .. \
 	&& rm -rf cmake* \
 	&& wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download \	
@@ -22,14 +24,14 @@ RUN (apt-get update -qq 1>>apt.log \
 	&& rm download \
 	&& mv boost_1_69_0 boost \
 	&& cd boost \
-	&& (./bootstrap.sh 1>>boost.log || (cat boost.log && false)) \
-	&& (./b2 -j8 --build-type=complete --layout=versioned stage \
-	--with-timer --with-date_time --with-random --with-test --with-regex 1>>boost.log || (cat boost.log && false)) \
+	&& ./bootstrap.sh 1>/dev/null \
+	&& ./b2 -j8 --build-type=complete --layout=versioned stage \
+	   --with-timer --with-date_time --with-random --with-test --with-regex 1>/dev/null \
   	&& echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
-  	&& (./bootstrap.sh 1>>boost.log || (cat boost.log && false)) \
-  	&& (./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete --layout=versioned stage \
-	--with-timer --with-date_time --with-random --with-test --with-regex 1>>boost.log || true) \
-	&& cd .. && rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
+  	&& ./bootstrap.sh 1>/dev/null\
+  	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete 
+	   --layout=versioned stage --with-timer --with-date_time --with-random --with-test --with-regex 1>/dev/null \
+	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& (find /boost/stage/lib/ -name 'libboost_*' -exec bash -c 'mv $0 ${0/mgw/mgw83}' {} \;) && ls /boost/stage/lib \
 	&& cd /usr/local/src \
 	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.04/nsis-3.04.zip/download \	
@@ -37,7 +39,7 @@ RUN (apt-get update -qq 1>>apt.log \
 	&& rm download \
 	&& mv nsis-3.04 nsis \
 	&& apt-get remove --purge -y -qq apt-transport-https dirmngr wget unzip \
-	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*) || (cat apt.log && false)
+	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
 ENV BOOST_LIBRARYDIR /boost/stage/lib/
