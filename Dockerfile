@@ -37,9 +37,8 @@ RUN (apt-get update -qq 1>>apt.log \
 	&& rm download \
 	&& mv nsis-3.04 nsis \
 	&& apt-get remove --purge -y -qq apt-transport-https dirmngr wget unzip \
-	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*) || (cat apt.log && false) \
+	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*) || (cat apt.log && false)
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
 ENV BOOST_LIBRARYDIR /boost/stage/lib/
 COPY nuget.config /root/.nuget/NuGet/NuGet.Config
-
