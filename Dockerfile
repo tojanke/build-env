@@ -35,8 +35,8 @@ RUN (apt-get update -qq 1>>apt.log \
 	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.04/nsis-3.04.zip/download \	
 	&& unzip -qq download \
 	&& rm download \
-	&& mv nsis-3.04 nsis
-	&& apt-get remove --purge -y -qq apt-transport-https dirmngr wget unzip
+	&& mv nsis-3.04 nsis \
+	&& apt-get remove --purge -y -qq apt-transport-https dirmngr wget unzip \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*) || (cat apt.log && false) \
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
