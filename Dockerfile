@@ -24,8 +24,9 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& rm download \
 	&& mv boost_1_69_0 boost \
 	&& cd boost \
+	&& echo "using gcc : 8.3 : /usr/bin/g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh 1>/dev/null \
-	&& ./b2 -j8 --build-type=complete --layout=versioned stage \
+	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-8.3 --build-type=complete --layout=versioned stage \
 	   --with-timer --with-date_time --with-random --with-test --with-regex 1>/dev/null \
   	&& echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   	&& ./bootstrap.sh 1>/dev/null\
