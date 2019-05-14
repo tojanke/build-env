@@ -39,7 +39,7 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& unzip -qq download \
 	&& rm download \
 	&& mv nsis-3.04 nsis \
-	&& apt-get remove --purge -y -qq g++ apt-transport-https dirmngr wget unzip \
+	&& apt-get remove --purge -y -qq g++ apt-transport-https dirmngr unzip \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/*
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
