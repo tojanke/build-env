@@ -22,8 +22,8 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download \	
 	&& tar xf download \
 	&& rm download \
-	&& mv boost_1_69_0 boost \
-	&& cd boost \
+	&& mv boost_1_69_0 /boost \
+	&& cd /boost \
 	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh \
 	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-8.3 --build-type=complete --layout=versioned stage \
