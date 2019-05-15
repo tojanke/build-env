@@ -9,7 +9,7 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" \
 	   | tee /etc/apt/sources.list.d/mono-official-stable.list \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
-	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine32 1>/dev/null \	
+	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
     	&& tar xf cmake-3.13.0.tar.gz \ 
