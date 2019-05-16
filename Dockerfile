@@ -11,9 +11,9 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
 	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.13/cmake-3.13.0.tar.gz \
-    	&& tar xf cmake-3.13.0.tar.gz \ 
-    	&& cd cmake-3.13.0 \
+    	&& wget -q https://cmake.org/files/v3.14/cmake-3.14.4.tar.gz \
+    	&& tar xf cmake-3.14.4.tar.gz \ 
+    	&& cd cmake-3.14.4 \
     	&& ./bootstrap 1>/dev/null \
     	&& make -j8 1>/dev/null \
     	&& make install 1>/dev/null \
