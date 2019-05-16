@@ -19,10 +19,10 @@ RUN 	   apt-get update -qq 1>>/dev/null \
     	&& make install 1>/dev/null \
 	&& cd .. \
 	&& rm -rf cmake* \
-	&& wget -q https://sourceforge.net/projects/boost/files/boost/1.69.0/boost_1_69_0.tar.gz/download \	
+	&& wget -q https://sourceforge.net/projects/boost/files/boost/1.70.0/boost_1_70_0.tar.gz/download \	
 	&& tar xf download \
 	&& rm download \
-	&& mv boost_1_69_0 /boost \
+	&& mv boost_1_70_0 /boost \
 	&& cd /boost \
 	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh \
