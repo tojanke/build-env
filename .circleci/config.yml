@@ -20,10 +20,10 @@ workflows:
   commit:
     jobs:
       - build      
-  weekly:
+  update:
     triggers:
       - schedule:
-          cron: "0 11 * * 0"
+          cron: "0 3 3 */4 *"
           filters:
             branches:
               only:
