@@ -3,7 +3,7 @@ Docker Compile/Test Enviromnent for C++/VB.Net
 
 - GCC 8
 - MinGW
-- Make/CMake
+- Make/CMake 3.15.3
 - Mono
 - NuGet
 - Wine
