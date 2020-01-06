@@ -39,7 +39,7 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& unzip -qq download \
 	&& rm download \
 	&& mv nsis-3.04 nsis \
-	&& apt-get remove --purge -y g++ apt-transport-https dirmngr unzip adwaita-icon-theme gtk-update-icon-cache hicolor-icon-theme krb5-locales libapparmor1 libatk1.0-0 libatk1.0-data libavahi-client3 libavahi-common-data libavahi-common3 libgail-common libgail18 libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-bin libgdk-pixbuf2.0-common libglade2-0 libglade2.0-cil libglib2.0-cil libgraphite2-3 libgssapi-krb5-2 libgtk2.0-0 libgtk2.0-bin libgtk2.0-cil libgtk2.0-common libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0 librsvg2-2 librsvg2-common libthai-data libthai0 libxcomposite1 libxcursor1 monodoc-base monodoc-browser monodoc-manual libcroco3 libcups2 libdatrie1 libxinerama1 libxrandr2 dbus fontconfig libdbus-1-3 libfribidi0 libharfbuzz0b libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libmono-2.0-1 libmono-profiler libmonoboehm-2.0-1 libxdamage1 libxfixes3 libxi6 mono-4.0-service mono-jay mono-utils \
+	&& apt-get remove --purge -y g++ \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/* && dpkg --get-selections
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
