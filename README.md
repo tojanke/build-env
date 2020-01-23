@@ -1,11 +1,15 @@
 # build-env
 Docker Build/CI Enviromnent for C++/VB.Net
 
+Packages:
 - GCC 8
 - MinGW
-- Make/CMake 3.15.3
+- Make
 - Mono
 - NuGet
 - Wine
-- Boost 1.71.0 (Precompiled for GCC 8 and MinGW)
-- NSIS 3.04	
+
+Manually installed:
+- CMake 3.16.3
+- Boost 1.72.0 (Precompiled for GCC 8 and MinGW)
+- NSIS 3.05
