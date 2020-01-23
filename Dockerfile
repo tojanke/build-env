@@ -1,5 +1,6 @@
 FROM debian:buster-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
+ENV DEBIAN_FRONTEND noninteractive
 ENV CC /usr/bin/gcc-8
 ENV CXX /usr/bin/g++-8
 RUN 	   apt-get update -qq 1>>/dev/null \
