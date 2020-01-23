@@ -1,5 +1,5 @@
-# test-env
-Docker Compile/Test Enviromnent for C++/VB.Net
+# build-env
+Docker Build/CI Enviromnent for C++/VB.Net
 
 - GCC 8
 - MinGW
