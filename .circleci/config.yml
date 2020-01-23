@@ -14,7 +14,7 @@ jobs:
           command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
           name: Publish Docker Image to Docker Hub
-          command: docker push tojanke/test-env:latest
+          command: docker push tojanke/build-env:latest
 workflows:
   version: 2
   commit:
