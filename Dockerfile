@@ -3,13 +3,12 @@ MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 ENV CC /usr/bin/gcc-8
 ENV CXX /usr/bin/g++-8
 RUN 	   apt-get update -qq 1>>/dev/null \
-	&& apt-get install -y -qq --no-install-recommends \
-	   g++ g++-8 make wget unzip g++-mingw-w64-x86-64 apt-transport-https dirmngr gnupg ca-certificates 1>/dev/null \
+	&& apt-get install -y -qq --no-install-recommends apt-utils apt-transport-https dirmngr gnupg ca-certificates 1>/dev/null \
 	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
 	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" \
 	   | tee /etc/apt/sources.list.d/mono-official-stable.list \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
-	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
+	&& apt-get install -y -qq --no-install-recommends g++ g++-8 make wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.16/cmake-3.16.3.tar.gz \
     	&& tar xf cmake-3.16.3.tar.gz \ 
