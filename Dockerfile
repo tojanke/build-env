@@ -11,18 +11,18 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
 	&& apt-get install -y -qq --no-install-recommends mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.15/cmake-3.15.3.tar.gz \
-    	&& tar xf cmake-3.15.3.tar.gz \ 
-    	&& cd cmake-3.15.3 \
+    	&& wget -q https://cmake.org/files/v3.16/cmake-3.16.3.tar.gz \
+    	&& tar xf cmake-3.16.3.tar.gz \ 
+    	&& cd cmake-3.16.3 \
     	&& ./bootstrap 1>/dev/null \
     	&& make -j8 1>/dev/null \
     	&& make install 1>/dev/null \
 	&& cd .. \
 	&& rm -rf cmake* \
-	&& wget -q https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz \	
-	&& tar xf boost_1_71_0.tar.gz \
-	&& rm boost_1_71_0.tar.gz \
-	&& mv boost_1_71_0 /boost \
+	&& wget -q https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz \	
+	&& tar xf boost_1_72_0.tar.gz \
+	&& rm boost_1_72_0.tar.gz \
+	&& mv boost_1_72_0 /boost \
 	&& cd /boost \
 	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh \
@@ -35,10 +35,10 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& (find /boost/stage/lib/ -name 'libboost_*' -exec bash -c 'mv $0 ${0/mgw/mgw83}' {} \;) && ls /boost/stage/lib \
 	&& cd /usr/local/src \
-	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.04/nsis-3.04.zip/download \	
+	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.05/nsis-3.05.zip/download \	
 	&& unzip -qq download \
 	&& rm download \
-	&& mv nsis-3.04 nsis \
+	&& mv nsis-3.05 nsis \
 	&& apt-get remove --purge -y g++ \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/* && dpkg --get-selections
 ENV BOOST_ROOT /boost/
