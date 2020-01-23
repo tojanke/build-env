@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run: 
           name: Build Image
-          command: docker build -t tojanke/test-env:latest .
+          command: docker build -t tojanke/build-env:latest .
           no_output_timeout: 2h
       - run:
           name: Log In to Docker Hub
