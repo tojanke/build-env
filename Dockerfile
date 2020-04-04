@@ -11,9 +11,9 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
 	&& apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>/dev/null \	
 	&& cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.16/cmake-3.16.3.tar.gz \
-    	&& tar xf cmake-3.16.3.tar.gz \ 
-    	&& cd cmake-3.16.3 \
+    	&& wget -q https://cmake.org/files/v3.16/cmake-3.17.0.tar.gz \
+    	&& tar xf cmake-3.17.0.tar.gz \ 
+    	&& cd cmake-3.17.0 \
     	&& ./bootstrap 1>/dev/null \
     	&& make -j8 1>/dev/null \
     	&& make install 1>/dev/null \
@@ -30,8 +30,8 @@ RUN 	   apt-get update -qq 1>>/dev/null \
 	   --with-timer --with-date_time --with-random --with-test --with-thread --with-regex \
   	&& echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   	&& ./bootstrap.sh \
-  	&& (./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete \
-	   --layout=versioned stage --with-timer --with-date_time --with-random --with-thread --with-regex || true) \
+  	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete \
+	   --layout=versioned stage --with-timer --with-date_time --with-random --with-thread --with-regex \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& ls /boost/stage/lib \
 	&& cd /usr/local/src \
