@@ -28,7 +28,7 @@ RUN	wget -q https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.t
 	&& ./bootstrap.sh \
 	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-8.3 --build-type=complete --layout=versioned stage \
 	   --with-timer --with-date_time --with-random --with-test --with-thread --with-regex
-RUN	echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
+RUN	cd /boost && echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   	&& ./bootstrap.sh \
   	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows --build-type=complete \
 	   --layout=versioned stage --with-timer --with-date_time --with-random --with-thread --with-regex \
