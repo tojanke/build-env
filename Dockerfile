@@ -11,9 +11,9 @@ RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>>/log/apt-upd.log \
 	&& apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>>/log/apt-inst.log \
 	&& cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.17/cmake-3.17.0.tar.gz \
-	&& tar xf cmake-3.17.0.tar.gz \ 
-    	&& cd cmake-3.17.0 \
+    	&& wget -q https://cmake.org/files/v3.17/cmake-3.17.1.tar.gz \
+	&& tar xf cmake-3.17.1.tar.gz \ 
+    	&& cd cmake-3.17.1 \
 	&& ./bootstrap 1>/log/cm-bs.log \
  	&& make -j8 1>/log/cm-mk.log \
  	&& make install 1>/log/cm-inst.log \
