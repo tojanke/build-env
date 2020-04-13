@@ -10,8 +10,8 @@ jobs:
           command: docker build -t tojanke/build-env:debug .
           no_output_timeout: 2h          
       - run:
-          name: Copy Generated Files          
-          command: docker cp tojanke/build-env:debug:/log .
+          name: Create Container, Retrieve Log Files          
+          command: docker create --name b-env tojanke/build-env:debug && docker cp b-env:/log . && docker rm -f b-env
           when: always
       - store_artifacts:
           path: log
