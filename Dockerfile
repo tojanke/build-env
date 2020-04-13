@@ -11,18 +11,18 @@ RUN	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E03280
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>/dev/null \
 	&& apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>/dev/null
 RUN	cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.17/cmake-3.17.0.tar.gz \
-	&& tar xf cmake-3.17.0.tar.gz \ 
-    	&& cd cmake-3.17.0 \
+    	&& wget -q https://cmake.org/files/v3.15/cmake-3.15.3.tar.gz \
+	&& tar xf cmake-3.15.3.tar.gz \ 
+    	&& cd cmake-3.15.3 \
 	&& ./bootstrap 1>/dev/null \
  	&& make -j8 1>/dev/null \
  	&& make install 1>/dev/null \
 	&& cd .. \
 	&& rm -rf cmake*
-RUN	wget -q https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz \	
-	&& tar xf boost_1_72_0.tar.gz \
-	&& rm boost_1_72_0.tar.gz \
-	&& mv boost_1_72_0 /boost \
+RUN	wget -q https://dl.bintray.com/boostorg/release/1.71.0/source/boost_1_71_0.tar.gz \	
+	&& tar xf boost_1_71_0.tar.gz \
+	&& rm boost_1_71_0.tar.gz \
+	&& mv boost_1_71_0 /boost \
 	&& cd /boost \
 	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh \
