@@ -3,8 +3,7 @@ MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV CC /usr/bin/gcc-8
 ENV CXX /usr/bin/g++-8
-RUN	mkdir /log
-RUN 	apt-get update -qq 1>>/log/apt-upd.log \
+RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
 	&& apt-get install -y -qq --no-install-recommends apt-utils apt-transport-https dirmngr gnupg ca-certificates 1>>/log/apt-inst.log 2>&1 \
 	&& apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF 1>/log/apt-key.log 2>&1 \
 	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" \
