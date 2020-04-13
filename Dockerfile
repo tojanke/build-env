@@ -34,7 +34,7 @@ RUN	cd /boost && echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-co
   	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows address-model=64 architecture=x86 \
 	   --build-type=complete --layout=versioned stage --with-timer --with-date_time --with-random --with-thread --with-regex 1>/log/b-mgw-b2.log \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
-	&& ls /boost/stage/lib 1>/log/boost-lib.log
+	&& (find /boost/stage/lib/ -name 'libboost_*' -exec bash -c 'mv $0 ${0/mgw/mgw83}' {} \;) && ls /boost/stage/lib 1>/log/boost-lib.log
 RUN	cd /usr/local/src \
 	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.05/nsis-3.05.zip/download \	
 	&& unzip -qq download \
