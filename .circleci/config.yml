@@ -8,7 +8,13 @@ jobs:
       - run: 
           name: Build Image
           command: docker build -t tojanke/build-env:debug .
-          no_output_timeout: 2h
+          no_output_timeout: 2h          
+      - run:
+          name: Copy Generated Files          
+          command: docker cp tojanke/build-env:debug:/log .
+          when: on_fail
+      - store_artifacts:
+          path: log
       - run:
           name: Log In to Docker Hub
           command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
