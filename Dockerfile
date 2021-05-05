@@ -13,10 +13,10 @@ RUN     apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev
 RUN	cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.20/cmake-3.20.2.tar.gz \
 	&& tar xf cmake-3.20.2.tar.gz \ 
-    	&& cd cmake-3.20.2 \
-	&& ./bootstrap 1>/log/cm-bs.log \
- 	&& make -j8 1>/log/cm-mk.log \
- 	&& make install 1>/log/cm-inst.log \
+    	&& cd cmake-3.20.2 
+RUN     ./bootstrap \
+ 	&& make -j8 \
+ 	&& make install \
 	&& cd .. \
 	&& rm -rf cmake*
 RUN     wget -q https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz \	
