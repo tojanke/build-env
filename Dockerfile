@@ -34,12 +34,12 @@ RUN     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0
 	   --build-type=complete --layout=versioned stage --with-timer --with-date_time --with-random --with-thread --with-regex 1>/log/b-mgw-b2.log \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& (find /boost/stage/lib/ -name 'libboost_*mgw*' -exec bash -c 'mv $0 ${0/mgw/mgw83}' {} \;) && ls /boost/stage/lib 1>/log/boost-lib.log \
-        && cd /usr/local/src \
+	&& cd /usr/local/src \
 	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.06.1/nsis-3.06.1.zip/download \	
 	&& unzip -qq download \
 	&& rm download \
 	&& mv nsis-3.06.1 nsis \
-        && apt-get remove --purge -y g++ \
+	&& apt-get remove --purge -y g++ \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/* && dpkg --get-selections 1>/log/dpkg.log
 ENV BOOST_ROOT /boost/
 ENV BOOST_INCLUDEDIR /boost/boost/
