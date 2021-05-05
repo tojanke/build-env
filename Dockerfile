@@ -13,8 +13,8 @@ RUN     apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev
 RUN	cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.20/cmake-3.20.2.tar.gz \
 	&& tar xf cmake-3.20.2.tar.gz \ 
-    	&& cd cmake-3.20.2 
-RUN     ./bootstrap \
+    	&& cd cmake-3.20.2 \
+        && ./bootstrap \
  	&& make -j8 \
  	&& make install \
 	&& cd .. \
