@@ -7,11 +7,11 @@ jobs:
       - checkout
       - run: 
           name: Build Image
-          command: docker build -t tojanke/build-env:latest .
+          command: docker build -t tojanke/build-env:testing .
           no_output_timeout: 2h          
       - run:
           name: Create Container, Retrieve Log Files          
-          command: docker create --name b-env tojanke/build-env:latest && docker cp b-env:/log . && docker rm -f b-env
+          command: docker create --name b-env tojanke/build-env:testing && docker cp b-env:/log . && docker rm -f b-env
           when: always
       - store_artifacts:
           path: log
@@ -20,7 +20,7 @@ jobs:
           command: echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
       - run:
           name: Publish Docker Image to Docker Hub
-          command: docker push tojanke/build-env:latest
+          command: docker push tojanke/build-env:testing
 workflows:
   version: 2
   commit:
