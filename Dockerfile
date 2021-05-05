@@ -1,15 +1,15 @@
 FROM debian:bullseye-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 ENV DEBIAN_FRONTEND noninteractive
-ENV CC /usr/bin/gcc-8
-ENV CXX /usr/bin/g++-8
+ENV CC /usr/bin/gcc-10
+ENV CXX /usr/bin/g++-10
 RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log 
 RUN	apt-get install -y -qq --no-install-recommends apt-utils apt-transport-https dirmngr gnupg ca-certificates 1>>/log/apt-inst.log 2>&1 
 RUN     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF 1>/log/apt-key.log 2>&1 \
 	&& echo "deb https://download.mono-project.com/repo/debian stable-stretch main" \
 	   | tee /etc/apt/sources.list.d/mono-official-stable.list \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>>/log/apt-upd.log
-RUN     apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>>/log/apt-inst.log
+RUN     apt-get install -y -qq --no-install-recommends g++ g++-10 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>>/log/apt-inst.log
 RUN	cd /usr/local/src \ 
     	&& wget -q https://cmake.org/files/v3.20/cmake-3.20.2.tar.gz \
 	&& tar xf cmake-3.20.2.tar.gz \ 
@@ -24,9 +24,9 @@ RUN     wget -q https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source
 	&& rm boost_1_76_0.tar.gz \
 	&& mv boost_1_76_0 /boost \
 	&& cd /boost \
-	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
+	&& echo "using gcc : 10.2 : g++-10 ;" > user-config.jam \
 	&& ./bootstrap.sh 1>/log/b-gcc-bs.log \
-	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-8.3 --build-type=complete --layout=versioned stage \
+	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-10.2 --build-type=complete --layout=versioned stage \
 	   --with-timer --with-date_time --with-random --with-test --with-thread --with-regex 1>/log/b-gcc-b2.log \
 	&& cd /boost && echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   	&& ./bootstrap.sh 1>/log/b-mgw-bs.log \
