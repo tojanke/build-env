@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:bullseye-slim
 MAINTAINER Tobias Janke <tobias.janke@outlook.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV CC /usr/bin/gcc-8
@@ -11,18 +11,18 @@ RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
 	&& dpkg --add-architecture i386 && apt-get update -qq 1>>/log/apt-upd.log \
 	&& apt-get install -y -qq --no-install-recommends g++ g++-8 make libssl-dev wget unzip g++-mingw-w64-x86-64 mono-complete mono-vbnc nuget wine wine32 1>>/log/apt-inst.log \
 	&& cd /usr/local/src \ 
-    	&& wget -q https://cmake.org/files/v3.17/cmake-3.17.1.tar.gz \
-	&& tar xf cmake-3.17.1.tar.gz \ 
-    	&& cd cmake-3.17.1 \
+    	&& wget -q https://cmake.org/files/v3.20/cmake-3.20.2.tar.gz \
+	&& tar xf cmake-3.20.2.tar.gz \ 
+    	&& cd cmake-3.20.2 \
 	&& ./bootstrap 1>/log/cm-bs.log \
  	&& make -j8 1>/log/cm-mk.log \
  	&& make install 1>/log/cm-inst.log \
 	&& cd .. \
 	&& rm -rf cmake* \
-	&& wget -q https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.gz \	
-	&& tar xf boost_1_72_0.tar.gz \
-	&& rm boost_1_72_0.tar.gz \
-	&& mv boost_1_72_0 /boost \
+	&& wget -q https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz \	
+	&& tar xf boost_1_76_0.tar.gz \
+	&& rm boost_1_76_0.tar.gz \
+	&& mv boost_1_76_0 /boost \
 	&& cd /boost \
 	&& echo "using gcc : 8.3 : g++-8 ;" > user-config.jam \
 	&& ./bootstrap.sh 1>/log/b-gcc-bs.log \
@@ -35,10 +35,10 @@ RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& (find /boost/stage/lib/ -name 'libboost_*' -exec bash -c 'mv $0 ${0/mgw/mgw83}' {} \;) && ls /boost/stage/lib 1>/log/boost-lib.log \
  	&& cd /usr/local/src \
-	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.05/nsis-3.05.zip/download \	
+	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.06.1/nsis-3.06.1.zip/download \	
 	&& unzip -qq download \
 	&& rm download \
-	&& mv nsis-3.05 nsis \
+	&& mv nsis-3.06.1 nsis \
 	&& apt-get remove --purge -y g++ \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/* && dpkg --get-selections 1>/log/dpkg.log
 ENV BOOST_ROOT /boost/
