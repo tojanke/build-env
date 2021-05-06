@@ -27,7 +27,7 @@ RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
 	&& echo "using gcc : 10.2 : g++-10 ;" > user-config.jam \
 	&& ./bootstrap.sh 1>/log/b-gcc-bs.log \
 	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-10.2 --build-type=complete --layout=versioned stage \
-	   --with-timer --with-date_time --with-random --with-test --with-system --with-thread --with-regex 1>/log/b-gcc-b2.log \
+	   --with-timer --with-date_time --with-chrono --with-random --with-test --with-system --with-thread --with-regex 1>/log/b-gcc-b2.log \
 	&& cd /boost && echo "using gcc : mingw32 : x86_64-w64-mingw32-g++ ;" > user-config.jam \
   	&& ./bootstrap.sh 1>/log/b-mgw-bs.log \
   	&& ./b2 -j8 --user-config=user-config.jam toolset=gcc-mingw32 target-os=windows address-model=64 architecture=x86 \
