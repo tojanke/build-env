@@ -19,10 +19,10 @@ RUN	mkdir /log && apt-get update -qq 1>>/log/apt-upd.log \
  	&& make install 1>/log/cm-inst.log \
 	&& cd .. \
 	&& rm -rf cmake* \
-        && wget -q https://boostorg.jfrog.io/artifactory/main/release/1.75.0/source/boost_1_75_0.tar.gz \	
-	&& tar xf boost_1_75_0.tar.gz \
-	&& rm boost_1_75_0.tar.gz \
-	&& mv boost_1_75_0 /boost \
+        && wget -q https://boostorg.jfrog.io/artifactory/main/release/1.76.0/source/boost_1_76_0.tar.gz \
+	&& tar xf boost_1_76_0.tar.gz \
+	&& rm boost_1_76_0.tar.gz \
+	&& mv boost_1_76_0 /boost \
 	&& cd /boost \
 	&& echo "using gcc : 10.2 : g++-10 ;" > user-config.jam \
 	&& ./bootstrap.sh 1>/log/b-gcc-bs.log \
