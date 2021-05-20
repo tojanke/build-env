@@ -36,10 +36,10 @@ RUN	cd /usr/local/src \
 	&& rm -rf /boost/libs && rm -rf /boost/bin.v2 && rm -rf /boost/doc && rm -rf /boost/tools \
 	&& (find /boost/stage/lib/ -name 'libboost_*mgw*' -exec bash -c 'mv $0 ${0/mgw/mgw10}' {} \;) && ls /boost/stage/lib 1>/log/boost-lib.log 
  RUN	cd /usr/local/src \
-	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.05/nsis-3.05.zip/download \	
+	&& wget -q https://sourceforge.net/projects/nsis/files/NSIS%203/3.06.1/nsis-3.06.1.zip/download \	
 	&& unzip -qq download \
 	&& rm download \
-	&& mv nsis-3.05 nsis 
+	&& mv nsis-3.06.1 nsis 
 RUN	apt-get remove --purge -y g++ \
 	&& apt-get clean 1>>apt.log && rm -rf /var/lib/apt/lists/* && dpkg --get-selections 1>/log/dpkg.log
 ENV BOOST_ROOT /boost/
