@@ -1,8 +1,8 @@
 # build-env
-Docker Build/CI Enviromnent for C++/VB.Net
+Docker Build/CI Enviromnent for C++/VB.Net based on Debian Bullseye
 
 Packages:
-- GCC 8
+- GCC 10
 - MinGW
 - Make
 - Mono
@@ -10,6 +10,6 @@ Packages:
 - Wine
 
 Manually installed:
-- CMake 3.17.1
-- Boost 1.72.0 (Precompiled for GCC 8 and MinGW)
-- NSIS 3.05
+- CMake 3.20.2
+- Boost 1.76.0 (Precompiled for GCC 10 and MinGW)
+- NSIS 3.06.1
